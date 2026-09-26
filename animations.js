@@ -504,3 +504,174 @@ document.addEventListener("DOMContentLoaded", () => {
         draw();
     }
 });
+
+// Projects Canvas Animation - Cascading Terminal Deploy Logs
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById('projects-bg');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+        // Use the parent section's dimensions for absolute-positioned canvas
+        const parent = canvas.parentElement;
+        width = canvas.width = parent.offsetWidth || window.innerWidth;
+        height = canvas.height = parent.offsetHeight || window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    // Delay slightly to ensure DOM is fully laid out
+    setTimeout(resize, 100);
+    window.addEventListener('load', resize);
+    // Also use ResizeObserver on the parent for dynamic height changes
+    if (window.ResizeObserver) {
+        new ResizeObserver(resize).observe(canvas.parentElement);
+    }
+    resize();
+
+    const COLORS = {
+        green:   '#03aa5c',
+        pink:    '#f386a1',
+        dark:    '#1e1e1e',
+        teal:    '#09aea1',
+        magenta: '#d45bb6',
+    };
+
+    // Pool of realistic deploy-log style strings
+    const LOG_STRINGS = [
+        '> icp.build()          OK',
+        '> leads.enrich()       OK',
+        '> email.verify()       OK',
+        '> seq.init()           OK',
+        '> ai.personalise()     OK',
+        '> smtp.warmup()        OK',
+        '> crm.connect()        OK',
+        '> reply.handler()      OK',
+        '> pipeline.deploy()    OK',
+        '> outbound.start()    ███',
+        '$ git push origin main',
+        '$ npm run build',
+        '✓ 2,847 leads loaded',
+        '✓ verified: 2,841',
+        '✓ pipeline: ACTIVE',
+        '✓ status: 200 OK',
+        '[ ████████░░ ] 82%',
+        '[ ██████████ ] 100%',
+        'DEPLOY → live',
+        'STATUS → running',
+        'UPTIME → 99.9%',
+        'ERR  targeting: null',
+        'WARN follow_up: slow',
+        'OK   meetings: +31',
+        'OK   reply_rate: 18%',
+        'SYS  build complete.',
+        '0x4F 0x4B 0x20 0x01',
+        'init: seq[0..12]',
+        'exec: enrich.js',
+        'exec: copy.ai.js',
+    ];
+
+    // A "stream" is one column of falling log lines
+    class Stream {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            // Pick a random x position, snapped to a grid so columns look structured
+            const colWidth = 280;
+            const numCols = Math.max(1, Math.ceil(width / colWidth));
+            const col = Math.floor(Math.random() * numCols);
+            this.x = col * colWidth + Math.random() * 40;
+
+            // Start above the canvas
+            this.y = -Math.random() * height;
+
+            // Speed: slow & majestic
+            this.speed = Math.random() * 0.6 + 0.3;
+
+            // How many lines in this stream burst
+            this.lineCount = Math.floor(Math.random() * 8) + 4;
+            this.lineHeight = 22;
+
+            // Generate lines for this stream
+            this.lines = [];
+            for (let i = 0; i < this.lineCount; i++) {
+                const str = LOG_STRINGS[Math.floor(Math.random() * LOG_STRINGS.length)];
+                // Color: mostly dark, occasional green/pink accent for key lines
+                let color = COLORS.dark;
+                if (str.startsWith('✓') || str.includes('OK') || str.includes('ACTIVE')) {
+                    color = Math.random() > 0.5 ? COLORS.green : COLORS.teal;
+                } else if (str.startsWith('ERR') || str.startsWith('WARN')) {
+                    color = COLORS.pink;
+                } else if (str.startsWith('DEPLOY') || str.startsWith('SYS')) {
+                    color = COLORS.magenta;
+                } else if (str.startsWith('0x') || str.startsWith('init') || str.startsWith('exec')) {
+                    color = COLORS.dark;
+                }
+                // Randomise alpha slightly per line for depth
+                this.lines.push({ text: str, color, alpha: Math.random() * 0.25 + 0.15 });
+            }
+            // The leading "hot" line is slightly brighter
+            if (this.lines.length > 0) {
+                this.lines[0].alpha = 0.55;
+                this.lines[0].hot = true;
+            }
+
+            this.totalHeight = this.lineCount * this.lineHeight;
+        }
+
+        update() {
+            this.y += this.speed;
+            // Once the entire stream has scrolled past the canvas, reset
+            if (this.y > height + this.totalHeight) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            ctx.font = '11px "JetBrains Mono", monospace';
+            ctx.textBaseline = 'top';
+            for (let i = 0; i < this.lines.length; i++) {
+                const lineY = this.y - (i * this.lineHeight);
+                // Only draw if on screen
+                if (lineY < -this.lineHeight || lineY > height + this.lineHeight) continue;
+
+                const line = this.lines[i];
+                ctx.globalAlpha = line.alpha;
+                ctx.fillStyle = line.color;
+
+                // Leading line gets a subtle highlight cursor
+                if (line.hot && i === 0) {
+                    ctx.fillStyle = COLORS.green;
+                    ctx.globalAlpha = line.alpha * 1.4;
+                }
+
+                ctx.fillText(line.text, this.x, lineY);
+            }
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    // Spawn enough streams to fill the width
+    const streams = [];
+    const streamCount = Math.max(6, Math.ceil(width / 240));
+    for (let i = 0; i < streamCount; i++) {
+        const s = new Stream();
+        // Stagger initial positions so they don't all start at once
+        s.y = Math.random() * height * 1.5 - height * 0.5;
+        streams.push(s);
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+        streams.forEach(s => {
+            s.update();
+            s.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+});
