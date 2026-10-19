@@ -8,6 +8,13 @@
 <title>The Founder - BoxMation</title>
 <meta content="Meet Ayhan Mirza, the founder of BoxMation, building zero-fluff outbound execution systems." name="description"/>
 
+
+
+
+
+
+
+
 <meta content="summary_large_image" property="twitter:card"/>
 <meta content="https://boxmation.vercel.app/founder.html" property="twitter:url"/>
 <meta content="The Founder - BoxMation" property="twitter:title"/>
@@ -35,12 +42,14 @@
             background-color: var(--ts-white);
             color: var(--ts-dark);
             overflow-x: hidden;
+            /* Subtle grid background */
             background-image: linear-gradient(var(--ts-dark) 1px, transparent 1px),
             linear-gradient(90deg, var(--ts-dark) 1px, transparent 1px);
             background-size: 50px 50px;
             background-position: -1px -1px;
             background-attachment: fixed;
         }
+        
         .font-display {
             font-family: 'JetBrains Mono', monospace;
             letter-spacing: -0.04em;
@@ -49,6 +58,10 @@
             font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
         }
         ::selection {
+            background-color: #1e1e1e !important;
+            color: #fefefe !important;
+        }
+        ::-moz-selection {
             background-color: #1e1e1e !important;
             color: #fefefe !important;
         }
@@ -73,6 +86,7 @@
         .brutalist-border {
             border: 1px solid var(--ts-dark);
         }
+        /* Neo-brutalist hover effect */
         .brutalist-button {
             transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 2px 2px 0px 0px var(--ts-dark);
@@ -85,28 +99,84 @@
             transform: translate(2px, 2px);
             box-shadow: 0px 0px 0px 0px var(--ts-dark);
         }
-        .zcal-inline-widget {
-            width: 100%;
-            min-height: 700px;
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
         }
-        .zcal-inline-widget > a {
-            display: none !important;
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            border-bottom: 1px solid var(--ts-dark);
+            border-top: 1px solid var(--ts-dark);
+            background-color: var(--ts-green);
+            color: var(--ts-white);
+            padding: 8px 0;
+            display: flex;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            padding-right: 20px;
+        }
+        /* Typing cursor */
+        .cursor-blink::after {
+            content: "█";
+            animation: blink 1s step-start infinite;
+            color: var(--ts-magenta);
+            margin-left: 4px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 0;
+            border-top: 1px solid var(--ts-dark);
+            border-left: 1px solid var(--ts-dark);
+            background-color: var(--ts-white);
+        }
+        .bento-grid > div {
+            border-right: 1px solid var(--ts-dark);
+            border-bottom: 1px solid var(--ts-dark);
+            background-color: var(--ts-white);
+            transition: background-color 0.3s;
+        }
+        .bento-grid > div:hover {
+            background-color: #fafafa;
         }
 
 </style>
 
+<!-- Open Graph / Social Media Meta Tags -->
 <meta content="BoxMation | Contact" property="og:title"/>
-<meta content="Full-Stack Outbound &amp; Inbound Systems for B2B Founders. We build, run, and optimise your revenue engine." property="og:description"/>
+<meta content="Full-Stack Outbound & Inbound Systems for B2B Founders. We build, run, and optimise your revenue engine." property="og:description"/>
 <meta content="website" property="og:type"/>
-<meta content="https://boxmation.vercel.app/booking.html" property="og:url"/>
-<meta content="https://boxmation.vercel.app/preview.png" property="og:image"/>
+<meta content="https://boxmation.vercel.app" property="og:url"/>
+<meta content="https://boxmation.vercel.app/og-image.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="BoxMation | Contact" name="twitter:title"/>
+<meta content="Full-Stack Outbound & Inbound Systems for B2B Founders." name="twitter:description"/>
+<meta content="https://boxmation.vercel.app/og-image.png" name="twitter:image"/>
 </head>
-<body class="bg-white text-[#1e1e1e] antialiased">
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-[#1e1e1e]">
-<div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between relative">
-<a class="flex items-center gap-3" href="/index.html">
-<img alt="BoxMation logo" class="w-8 h-8 object-contain" src="new-logo.png"/>
-<span class="font-display text-2xl font-bold leading-none tracking-tight">BoxMation</span>
+<body class="antialiased">
+<!-- Navigation -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-[#1e1e1e]">
+<div class="h-20 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2 sm:gap-6">
+<a class="flex items-center gap-2 sm:gap-3 flex-shrink-0 hover:opacity-80 transition-opacity cursor-pointer" href="/">
+<div class="h-10 w-10 overflow-hidden flex items-center justify-center brutalist-border">
+<img alt="BoxMation Logo" class="h-full w-full object-contain p-1" src="new-logo.png"/>
+</div>
+<span class="font-display text-xl font-bold tracking-tight text-black">BoxMation</span>
 </a>
 <nav class="hidden xl:flex items-center gap-7">
 <a class="text-sm font-bold text-black" href="/founder.html">The Founder</a>
@@ -116,11 +186,12 @@
 </nav>
 <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
 <a class="inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-2.5 text-sm font-semibold hover:scale-105 transition-transform whitespace-nowrap brutalist-border bg-white text-black hover:bg-[#1e1e1e] hover:text-white transition-colors" href="/booking.html">Book Fit Call / Discovery</a>
-<button aria-label="Toggle menu" class="xl:hidden p-1 text-black hover:bg-gray-100 transition-colors flex items-center justify-center brutalist-border brutalist-button" id="mobile-menu-btn">
+<button aria-label="Toggle menu" class="xl:hidden p-1 text-black hover:bg-gray-100 transition-colors flex items-center justify-center brutalist-border brutalist-button brutalist-button" id="mobile-menu-btn">
 <span class="material-symbols-outlined">menu</span>
 </button>
 </div>
 </div>
+<!-- Mobile Menu -->
 <div class="hidden xl:hidden bg-white border-t border-[#1e1e1e] absolute top-full left-0 right-0 brutalist-border" id="mobile-menu">
 <nav class="flex flex-col p-4 gap-4">
 <a class="text-black font-bold mobile-link" href="/founder.html">The Founder</a>
@@ -130,77 +201,129 @@
 </nav>
 </div>
 </header>
-<main class="w-full pt-20 bg-transparent min-h-screen relative overflow-hidden">
-<section class="w-full relative z-10 py-32 border-t border-[#1e1e1e] brutalist-border" id="book-discovery">
+<main class="w-full pt-20 bg-transparent min-h-screen relative overflow-hidden"><canvas class="fixed top-0 left-0 w-full h-full pointer-events-none z-0" id="booking-bg" style="opacity: 1;"></canvas>
+<section class="w-full relative z-10 py-32 relative overflow-hidden border-t border-[#1e1e1e] brutalist-border" id="book-discovery"><canvas class="absolute inset-0 w-full h-full pointer-events-none z-0" id="booking-bg-shape" style="opacity: 0.15;"></canvas>
 <div class="max-w-[1240px] mx-auto px-6 lg:px-8 relative reveal z-10">
 <div class="max-w-6xl mx-auto p-8 sm:p-16 border border-[#1e1e1e] brutalist-border bg-white">
 <div class="flex flex-col gap-16">
+<!-- Text & Requirements -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 <div>
 <span class="mono text-xs text-blue-600 uppercase font-bold tracking-widest block mb-4">READY TO TALK?</span>
-<h2 class="font-display text-5xl md:text-6xl text-black font-bold tracking-tight mb-6">Book a Call</h2>
-<p class="text-lg leading-relaxed font-medium mb-8">25 minutes. We'll look at who you're targeting, whether it's a fit, and if it is, walk through exactly how the 14-day build works.</p>
+<h2 class="font-display text-5xl md:text-6xl text-black font-bold tracking-tight mb-6">
+                                    Book a Call
+                                </h2>
+<p class="text-lg leading-relaxed font-medium mb-8">
+                                    25 minutes. We'll look at who you're targeting, whether it's a fit, and if it is, walk through exactly how the 14-day build works.
+                                </p>
 <div class="mt-12 pt-8 border-t border-[#1e1e1e]">
 <span class="mono text-xs text-gray-400 uppercase font-bold tracking-widest block mb-6">Or Connect Directly</span>
 <div class="flex flex-wrap items-center gap-6 text-gray-600">
-<a class="inline-flex items-center gap-3 text-sm font-bold text-black hover:text-[#1e1e1e] transition-colors" href="mailto:ayhan@boxmation.co"><span class="material-symbols-outlined text-base">mail</span> ayhan@boxmation.co</a>
-<a class="inline-flex items-center gap-3 text-sm font-bold text-black hover:text-[#1e1e1e] transition-colors" href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined text-base">link</span> LinkedIn</a>
+<a class="hover:text-[#25D366] hover:-translate-y-1 transition-all" href="https://wa.me/923156719899" target="_blank" title="WhatsApp"><svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.123-.272-.198-.57-.347z"/><path d="M12.004 2.001A9.994 9.994 0 0 0 4.65 18.647L3.37 21.5l2.97-1.25A9.99 9.99 0 1 0 12.004 2.001zm0 18.15c-1.375 0-2.728-.358-3.918-1.036l-.282-.166-1.763.742.748-1.723-.184-.29A8.03 8.03 0 1 1 20.03 12a8.032 8.032 0 0 1-8.026 8.151z"/></svg></a>
+<a class="hover:text-black transition-colors" href="https://www.threads.com/@ayhansiillusion" target="_blank" title="Threads"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 192 192"><path d="M141.537 98.617c-2.786-1.185-7.485-2.102-16.04-2.104-18.51-.006-34.425 10.673-34.425 26.96 0 15.802 13.4 25.767 27.347 25.767 11.311 0 20.283-4.468 26.477-11.116l-9.924-8.126c-5.573 5.56-11.546 7.964-18.255 7.964-9.852 0-14.616-6.262-14.616-14.505 0-7.519 4.81-14.862 16.345-14.862 3.482 0 6.364.389 9.123 1.058l-2.278-9.537zm-12.157-48.87c-6.436 0-11.924 2.75-15.96 7.404-3.39 3.89-5.969 9.024-6.984 15.542l11.177 2.921c1.282-5.016 3.855-9.671 7.586-12.547 2.524-1.9 5.937-2.865 9.562-2.865 3.603 0 7.172 1.188 9.869 3.377l8.804-9.895c-5.493-5.838-12.785-8.937-23.055-8.937zM96 0C43.048 0 0 42.981 0 96c0 53.019 43.048 96 96 96s96-42.981 96-96C192 42.981 148.952 0 96 0zm54.256 128.545c-14.677 17.561-39.37 25.862-62.583 25.862-25.276 0-48.896-9.318-66.237-26.251-16.6-16.14-25.673-39.199-25.673-63.962C-4.237 44.884 20.37 19.365 52.041 12.69c-1.882 9.05-2.878 18.089-2.878 27.13 0 22.901 8.864 42.093 23.314 56.97 12.265 12.629 29.351 20.86 48.872 21.768 17.739.826 30.833-4.752 42.662-14.304l-8.857-9.613c-11.806 7.818-24.348 10.665-38.195 9.857-18.045-.846-33.86-9.487-45.538-24.385-13.708-17.335-15.400-36.401-15.400-36.401 1.901 10.06 5.198 18.997 12.004 28.097 11.637 15.703 29.733 24.985 49.864 25.565 18.104.521 33.571-7.54 47.039-22.31l7.442 10.807z"/></svg></a>
+<a class="hover:text-black hover:-translate-y-1 transition-all" href="mailto:boxmation.labs@gmail.com" title="Email"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
+<a class="hover:text-[#0a66c2] hover:-translate-y-1 transition-all" href="https://www.linkedin.com/in/ayhan-mirza-276101254" target="_blank" title="LinkedIn"><svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M6.94 8.5A1.5 1.5 0 1 1 6.94 5.5a1.5 1.5 0 0 1 0 3zm-1.5 1.35h3V18h-3V9.85zm5.36 0h2.88v1.14h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V18h-3v-16.89h-3v16.89h-3V9.85z"/></svg></a>
+<a class="hover:text-[#E1306C] hover:-translate-y-1 transition-all" href="https://www.instagram.com/ayhansiillusion/?hl=en" target="_blank" title="Instagram"><svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zm5-3.3a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2z"/></svg></a>
+<a class="hover:text-black hover:-translate-y-1 transition-all" href="https://x.com/ayhansiillusion" target="_blank" title="X (Twitter)"><svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.12l-4.79-7.02L6.8 22H3.7l7.26-8.3L.8 2h6.28l4.33 6.48L18.9 2zm-1.08 18h1.7L7.1 3.9H5.33L17.82 20z"/></svg></a>
+<a class="hover:text-[#FF0000] hover:-translate-y-1 transition-all" href="https://www.youtube.com/@ayhanmirza.gtmengineering" target="_blank" title="YouTube"><svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M23.5 6.8a3.08 3.08 0 0 0-2.16-2.17C19.49 4.19 12 4.19 12 4.19s-7.49 0-9.34.44A3.08 3.08 0 0 0 .5 6.8C.06 8.67.06 12 .06 12s0 3.33.44 5.2a3.08 3.08 0 0 0 2.16 2.17c1.85.44 9.34.44 9.34.44s7.49 0 9.34-.44a3.08 3.08 0 0 0 2.16-2.17c.44-1.87.44-5.2.44-5.2s0-3.33-.44-5.2zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z"/></svg></a>
 </div>
 </div>
 </div>
-<div class="rounded-none border border-[#1e1e1e] brutalist-border bg-[#f7f7f7] p-4 sm:p-6">
-<div class="flex items-center gap-4 pb-5 border-b border-[#1e1e1e]">
-<img alt="Founder" class="w-12 h-12 object-cover border-2 border-white brutalist-border" src="founder_photos/IMG-20250617-WA0011.jpg"/>
-<div><span class="font-display text-lg text-black font-bold block leading-none mb-1">25-minute call</span><span class="text-sm font-medium">direct with the founder</span></div>
+<div class="bg-white p-8 border border-[#1e1e1e] brutalist-border">
+<h3 class="font-display text-2xl text-black font-bold mb-6">Before You Book</h3>
+<div class="space-y-4 text-sm font-medium mb-8">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span>You're the founder or the person who owns this decision</span>
 </div>
-<div class="pt-5">
-<div class="zcal-inline-widget">
-<script type="text/javascript" async src="https://static.zcal.co/embed/v1/embed.js"></script>
-<div class="zcal-inline-widget">
-<a href="https://zcal.co/i/zDPJea_Q">Coffee with Ayhan - Schedule a meeting</a>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span>Revenue is roughly $100K–$300K/month</span>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<span>You're ready to start within 30 days if it's a fit</span>
+</div>
+</div>
+<div class="flex items-center gap-4 pt-6 border-t border-[#1e1e1e]">
+<img alt="Founder" class="w-12 h-12 object-cover border-2 border-white brutalist-border" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj5Tv2ppvjJcc3MrowN44j_I3y_vOnnI4C1-Ny6Zm8EA51HQI3a0Wd3N1q0jGJQ7re1FQYBm_1aU6nEsgzM9G1Y1TuOl8njH3zT4h4h9j1uD1jCqxvV8qg2GQ0n-5GuYgAxrM0Q7ogz5sN0pX36n0yU-lVv8_759wW0eYUFZQ2ROQ5KqjM0bpv0cQ9qM6q2jNXfRkK0P-S0b9kD5oiXbE6V1aN9Xg0zUbw=w600-h600"/>
+<div>
+<span class="font-display text-lg text-black font-bold block leading-none mb-1">25-minute call</span>
+<span class="text-sm font-medium">direct with the founder</span>
 </div>
 </div>
 </div>
-<div class="mt-4 text-center">
-<a class="inline-flex items-center justify-center px-5 py-3 border border-[#1e1e1e] bg-white hover:bg-[#1e1e1e] hover:text-white transition-colors brutalist-border brutalist-button" href="https://zcal.co/i/zDPJea_Q" target="_blank" rel="noopener noreferrer">Open booking calendar in a new tab</a>
 </div>
+<!-- Zcal Embed Full Width -->
+<div class="bg-white border border-[#1e1e1e] w-full h-[650px] overflow-hidden flex flex-col relative z-10 brutalist-border">
+<iframe class="w-full h-full relative z-10" onload="document.getElementById('cal-loader').style.display='none';" src="https://zcal.co/ayhan/boxmation?embed=1" style="border: none;"></iframe>
 </div>
 </div>
 </div>
 </div>
 </section>
 </main>
+<!-- Footer -->
 <footer class="w-full bg-white py-20 border-t border-[#1e1e1e] reveal brutalist-border brutalist-button" id="contact">
 <div class="max-w-[1240px] mx-auto px-6 lg:px-8">
 <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 pb-12 border-b border-[#1e1e1e]">
 <div class="space-y-4 max-w-lg">
-<div class="flex items-center gap-3"><span class="font-display text-3xl font-bold text-black">BoxMation</span></div>
-<p class="font-medium">Full-Stack Outbound &amp; Inbound Systems for B2B Founders</p>
+<div class="flex items-center gap-3">
+<span class="font-display text-3xl font-bold text-black">BoxMation</span>
+</div>
+<p class="font-medium">Full-Stack Outbound & Inbound Systems for B2B Founders</p>
 </div>
 <div class="flex flex-wrap items-center gap-8 text-sm font-semibold">
-<a class="hover:text-black transition-colors" href="/founder.html">The Founder</a>
-<a class="hover:text-black transition-colors" href="/projects.html">Case Studies</a>
+<a class="hover:text-black transition-colors" href="founder.html">The Founder</a>
+<a class="text-sm font-medium hover:text-black transition-colors" href="/projects.html">Case Studies</a>
 <a class="hover:text-black transition-colors" href="/pricing.html">Pricing &amp; Offer</a>
 <a class="hover:text-black transition-colors" href="/booking.html">Contact</a>
+<a class="hover:text-black transition-colors" href="terms.html">Terms &amp; Privacy</a>
 </div>
 </div>
-<div class="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-gray-600">
-<div>© 2025 BoxMation. All rights reserved.</div>
-<div class="flex gap-6">
-<a class="hover:text-black transition-colors" href="/terms.html">Terms</a>
-<a class="hover:text-black transition-colors" href="/privacy.html">Privacy</a>
+<div class="pt-10 flex flex-col sm:flex-row items-center justify-between gap-6 mono text-xs font-bold text-gray-400">
+<p>© 2026 BoxMation Systems Inc. Built for zero-fluff revenue execution.</p>
+<div class="flex flex-wrap items-center gap-6">
+<a class="hover:text-[#25D366] transition-colors" href="https://wa.me/923156719899" target="_blank" title="WhatsApp"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413-.074-.123-.272-.198-.57-.347z"/><path d="M12.004 2.001A9.994 9.994 0 0 0 4.65 18.647L3.37 21.5l2.97-1.25A9.99 9.99 0 1 0 12.004 2.001zm0 18.15c-1.375 0-2.728-.358-3.918-1.036l-.282-.166-1.763.742.748-1.723-.184-.29A8.03 8.03 0 1 1 20.03 12a8.032 8.032 0 0 1-8.026 8.151z"/></svg></a>
+<a class="hover:text-black transition-colors" href="https://www.threads.com/@ayhansiillusion" target="_blank" title="Threads"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 192 192"><path d="M141.537 98.617c-2.786-1.185-7.485-2.102-16.04-2.104-18.51-.006-34.425 10.673-34.425 26.96 0 15.802 13.4 25.767 27.347 25.767 11.311 0 20.283-4.468 26.477-11.116l-9.924-8.126c-5.573 5.56-11.546 7.964-18.255 7.964-9.852 0-14.616-6.262-14.616-14.505 0-7.519 4.81-14.862 16.345-14.862 3.482 0 6.364.389 9.123 1.058l-2.278-9.537zm-12.157-48.87c-6.436 0-11.924 2.75-15.96 7.404-3.39 3.89-5.969 9.024-6.984 15.542l11.177 2.921c1.282-5.016 3.855-9.671 7.586-12.547 2.524-1.9 5.937-2.865 9.562-2.865 3.603 0 7.172 1.188 9.869 3.377l8.804-9.895c-5.493-5.838-12.785-8.937-23.055-8.937zM96 0C43.048 0 0 42.981 0 96c0 53.019 43.048 96 96 96s96-42.981 96-96C192 42.981 148.952 0 96 0zm54.256 128.545c-14.677 17.561-39.37 25.862-62.583 25.862-25.276 0-48.896-9.318-66.237-26.251-16.6-16.14-25.673-39.199-25.673-63.962C-4.237 44.884 20.37 19.365 52.041 12.69c-1.882 9.05-2.878 18.089-2.878 27.13 0 22.901 8.864 42.093 23.314 56.97 12.265 12.629 29.351 20.86 48.872 21.768 17.739.826 30.833-4.752 42.662-14.304l-8.857-9.613c-11.806 7.818-24.348 10.665-38.195 9.857-18.045-.846-33.86-9.487-45.538-24.385-13.708-17.335-15.400-36.401-15.400-36.401 1.901 10.06 5.198 18.997 12.004 28.097 11.637 15.703 29.733 24.985 49.864 25.565 18.104.521 33.571-7.54 47.039-22.31l7.442 10.807z"/></svg></a>
+
+<a class="hover:text-black transition-colors" href="mailto:boxmation.labs@gmail.com" title="Email"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
+<a class="hover:text-[#0a66c2] transition-colors" href="https://www.linkedin.com/in/ayhan-mirza-276101254" target="_blank" title="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M6.94 8.5A1.5 1.5 0 1 1 6.94 5.5a1.5 1.5 0 0 1 0 3zm-1.5 1.35h3V18h-3V9.85zm5.36 0h2.88v1.14h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V18h-3v-16.89h-3v16.89h-3V9.85z"/></svg></a>
+<a class="hover:text-[#E1306C] transition-colors" href="https://www.instagram.com/ayhansiillusion/?hl=en" target="_blank" title="Instagram"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zm5-3.3a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2z"/></svg></a>
+<a class="hover:text-black transition-colors" href="https://x.com/ayhansiillusion" target="_blank" title="X (Twitter)"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M18.90 2H22l-6.77 7.74L23.2 22h-6.12l-4.79-7.02L6.8 22H3.7l7.26-8.3L.8 2h6.28l4.33 6.48L18.9 2zm-1.08 18h1.7L7.1 3.9H5.33L17.82 20z"/></svg></a>
+<a class="hover:text-[#FF0000] transition-colors" href="https://www.youtube.com/@ayhanmirza.gtmengineering" target="_blank" title="YouTube"><svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M23.5 6.8a3.08 3.08 0 0 0-2.16-2.17C19.49 4.19 12 4.19 12 4.19s-7.49 0-9.34.44A3.08 3.08 0 0 0 .5 6.8C.06 8.67.06 12 .06 12s0 3.33.44 5.2a3.08 3.08 0 0 0 2.16 2.17c1.85.44 9.34.44 9.34.44s7.49 0 9.34-.44a3.08 3.08 0 0 0 2.16-2.17c.44-1.87.44-5.2.44-5.2s0-3.33-.44-5.2zM9.75 15.5V8.5l6.25 3.5-6.25 3.5z"/></svg></a>
 </div>
 </div>
 </div>
 </footer>
+<!-- Intersection Observer Script for Smooth Reveal on Scroll -->
 <script>
-const menuButton = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-if (menuButton && mobileMenu) {
-  menuButton.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
-}
-</script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // Mobile Menu Toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = menuBtn.querySelector('.material-symbols-outlined');
+            
+            menuBtn.addEventListener('click', function() {
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                    menuIcon.textContent = 'close';
+                } else {
+                    menu.classList.add('hidden');
+                    menuIcon.textContent = 'menu';
+                }
+            });
+            
+            document.querySelectorAll('.mobile-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    menu.classList.add('hidden');
+                    menuIcon.textContent = 'menu';
+                });
+            });
+
+        });
+    </script>
+<script src="animations.js?v=1790184388"></script>
 </body>
 </html>
